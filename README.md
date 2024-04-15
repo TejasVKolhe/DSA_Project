@@ -44,6 +44,6 @@ availability of efficient C++ libraries like Boost
 
 ## References
 - Complex Circuit Analysis - [Automated Circuit Solving](https://core.ac.uk/download/pdf/53745212.pdf)
-- Keith Paton Pruning Pruning Algorithm - [Pruning Paper](https://dl.acm.org/doi/pdf/10.1145/363219.363232)
+- Keith Paton Pruning Algorithm - [Pruning Paper](https://dl.acm.org/doi/pdf/10.1145/363219.363232)
 - Cycle Finding Algorithm - [Graph Algorithm](https://www.codeproject.com/Articles/1158232/Enumerating-All-Cycles-in-an-Undirected-Graph)
 - Applications of Graph Theory - [N. Deo](https://archive.org/details/GraphTheoryWithApplicationsToEngineeringAndComputerScience)
