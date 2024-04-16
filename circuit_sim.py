@@ -72,7 +72,7 @@ class MainWindow(QMainWindow):
         
         ## number of column and rows of the grid
         global dimension
-        dimension = 5
+        dimension = 6
         n = dimension
         
         ## size in pixel 
@@ -130,7 +130,7 @@ class MainWindow(QMainWindow):
         # print("button rotation proprty : ",rotation)
         rotation += 90
         if rotation >= 360:
-            rotation = 0
+            rotation = 0    
         transform = QTransform().rotate(rotation)
         rotated_pixmap = pixmap.transformed(transform)
 
@@ -146,7 +146,29 @@ class MainWindow(QMainWindow):
         # print(self.active_component)
         if self.active_component=='Wire' or self.active_component=='Node':
             val = 0 
-        print("Row, Col:", row, col, self.active_component, val, rotation)
+        
+        if self.active_component=='Wire' or self.active_component=='Resistor':
+            if rotation == 180:
+                rotation = 0
+            if rotation == 270:
+                rotation = 90
+                
+
+        if self.active_component=='Node':
+            rotation = 0
+
+        
+        match rotation:
+            case 0:
+                direction = "  ({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col, newrow=row, newcol=col+1)
+            case 90:
+                direction = " ({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col, newrow=row+1, newcol=col)
+            case 180:
+                direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col+1, newrow=row, newcol=col)
+            case 270:
+                direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
+
+        print("Row, Col:", row, col, self.active_component, val, rotation, direction)
 
 
 
