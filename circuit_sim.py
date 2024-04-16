@@ -72,7 +72,7 @@ class MainWindow(QMainWindow):
         
         ## number of column and rows of the grid
         global dimension
-        dimension = 6
+        dimension = 15
         n = dimension
         
         ## size in pixel 
@@ -167,6 +167,15 @@ class MainWindow(QMainWindow):
                 direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col+1, newrow=row, newcol=col)
             case 270:
                 direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
+
+
+
+        if self.active_component=='Node':
+                direction =  "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col, newrow=row, newcol=col+1)
+                direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col, newrow=row+1, newcol=col)
+                direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col+1, newrow=row, newcol=col)
+                direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
+
 
         print("Row, Col:", row, col, self.active_component, val, rotation, direction)
 
