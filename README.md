@@ -9,7 +9,6 @@ This highly multidisciplinary approach combines abstract Mathematics, Linear Alg
 1. Data Structures
 - Graphs
 - Trees
-- Stack
 
 
 2. Algorithms
