@@ -10,7 +10,7 @@ This highly multidisciplinary approach combines abstract Mathematics, Linear Alg
 - Graphs
 - Trees
 - Stack
-
+- Arrays [1D, 2D, 3D]
 
 2. Algorithms
 - Gotlieb and Corneil Algorithm
@@ -47,3 +47,4 @@ availability of efficient C++ libraries like Boost
 - Keith Paton Pruning Algorithm - [Pruning Paper](https://dl.acm.org/doi/pdf/10.1145/363219.363232)
 - Cycle Finding Algorithm - [Graph Algorithm](https://www.codeproject.com/Articles/1158232/Enumerating-All-Cycles-in-an-Undirected-Graph)
 - Applications of Graph Theory - [N. Deo](https://archive.org/details/GraphTheoryWithApplicationsToEngineeringAndComputerScience)
+- Solving linear non-homogenuous equations - [Numerical Recipes](http://e-maxx.ru/bookz/files/numerical_recipes.pdf) 

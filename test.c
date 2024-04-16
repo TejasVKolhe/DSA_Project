@@ -7,15 +7,17 @@
 #define MAX_VERTICES_IN_CYCLE 4 //Maximum number of vertices in each cycle, need to take from user
 
 
-
+// Step _1
 void FindSpan(int Adj[][N + 1], int span[][N + 1], int trav[N + 1]);
 void createAdjMatrix(int Adj[][N + 1],int arr[][2]);
 void printAdjMatrix(int Adj[][N + 1]);
 int count_discarded(int Adj[][N+1], int span[][N+1], int discarded[][2]);
 void pruning(int span[][N+1], int discarded[][2], int loops[MAX_DISCARDED_EDGES][MAX_VERTICES_IN_CYCLE], int number_of_discarded);
 void DFS(int u, int v, int parent, bool visited[], int span[][N + 1], int cycle[], int *cycle_index);
-void add_edges(int loop[MAX_VERTICES_IN_CYCLE], int edges_in_cycle[MAX_VERTICES_IN_CYCLE][2]);
+
+// Step_2
 void findlink(int cycle[][N + 1], int *v1, int *v2);
+void add_edges(int loop[MAX_VERTICES_IN_CYCLE], int edges_in_cycle[MAX_VERTICES_IN_CYCLE][2]);
 void loop_orientation(int cycle[][N + 1]);
 void orientall_loops(int cycles[][N + 1][N + 1], int numcycles);
 
@@ -23,11 +25,13 @@ void orientall_loops(int cycles[][N + 1][N + 1], int numcycles);
 // Adding the part after orientation
 void matrixMultiply(int mat1[][N + 1], int mat2[][N + 1], int result[][N + 1]);
 void form_equations(int cycles[][N + 1][N + 1], int numcycles, int resistor[][N + 1], int voltage[][N + 1], int coeff[][N + 1], int rhs_mat[N + 1]);
-void solveSystemOfEquations(int coeff[N + 1][N + 1], int rhs_mat[N + 1], int numcycles, float Loop_current[N+1]);
 int add_onematrix(int current[][N + 1], int ref[][N + 1]);
 int add_onematrix_2(int src[][N + 1], int cycle[][N + 1]);
+
 void gaussianElimination(float A[20][20], int n);
 void backSubstitution(float A[20][20], float x[10], int n);
+void solveSystemOfEquations(int coeff[N + 1][N + 1], int rhs_mat[N + 1], int numcycles, float Loop_current[N+1]);
+
 void init_mat(int mat[][N + 1]);
 void Voltage_resistor(int cycles[][N+1][N+1],int numcycles, int resistor[N+1][N+1], float loopCurrent[N+1], float volt_res[N+1][N+1]);
 
