@@ -47,3 +47,26 @@ availability of efficient C++ libraries like Boost
 - Cycle Finding Algorithm - [Graph Algorithm](https://www.codeproject.com/Articles/1158232/Enumerating-All-Cycles-in-an-Undirected-Graph)
 - Applications of Graph Theory - [N. Deo](https://archive.org/details/GraphTheoryWithApplicationsToEngineeringAndComputerScience)
 - Solving linear non-homogenuous equations - [Numerical Recipes](http://e-maxx.ru/bookz/files/numerical_recipes.pdf) 
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/TejasVKolhe/DSA_Project.git
+```
+
+Go to the project directory
+
+```bash
+  cd DSA_Project/
+```
+
+Install dependencies
+
+```bash
+  rm -rf .venv
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+```
