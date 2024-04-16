@@ -162,16 +162,74 @@ void orientall_loops(int cycles[][N + 1][N + 1], int numcycles)
 }
 
 // Function to multiply two matrices
-void matrixMultiply(int N, int mat1[][N], int mat2[][N], int result[][N]) {
+void matrixMultiply(int N, int mat1[][N + 1], int mat2[][N + 1], int result[][N + 1]) {
     int i, j, k;
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
+    for (i = 0; i < N + 1; i++) {
+        for (j = 0; j < N + 1; j++) {
             result[i][j] = 0;
-            for (k = 0; k < N; k++) {
+            for (k = 0; k < N + 1; k++) {
                 result[i][j] += mat1[i][k] * mat2[k][j];
-            }	
+            }
         }
     }
+}
+
+int add_onematrix(int src[][N + 1], int ref[][N + 1])
+{
+	int sum = 0;
+	for (int i = 0; i < N + 1; i++) 
+	{
+        for (int j = 0; j < N + 1; j++) 
+		{
+			if(src[i][j] != 0 && ref[i][j] != 0)
+			{
+				sum = sum + src[i][j]; 
+			}
+		}
+	}
+	return sum;
+}
+
+int add_onematrix_2(int src[][N + 1])
+{
+	int sum = 0;
+	for (int i = 0; i < N + 1; i++) 
+	{
+        for (int j = 0; j < N + 1; j++) 
+		{
+			if(src[i][j] != 0)
+			{
+				sum = sum + src[i][j]; 
+			}
+		}
+	}
+	return sum;
+}
+
+void form_equations(int cycles[][N + 1][N + 1], int numcycles, int resistor[][N + 1], int voltage[][N + 1])
+{
+	int coeff[N + 1][N + 1], rhs_mat[N + 1], src[N + 1][N + 1], ref[N + 1][N + 1], mat[N + 1][N + 1];
+
+	//coeff = coefficient matrix
+	//rhs_matrix = the matrix on rhs of the equation that makes it non homo
+
+	for(int i = 0; i < numcycles; i++)
+	{
+		for (int j = 0; j < numcycles; j++) 
+		{
+			matrixMultiply(N + 1, cycles[i], resistor, src);
+			matrixMultiply(N + 1, cycles[j], resistor, ref);
+			int temp = add_onematrix(src, ref);
+			coeff[i][j] = temp;
+		}
+	}
+
+	for(int l = 0; l < numcycles; l++)
+	{
+		matrixMultiply(N + 1, cycles[l], voltage, mat);
+		int temp = add_onematrix_2(mat);
+		rhs_mat[l] = temp;
+	}
 }
 
 // Driver Code
