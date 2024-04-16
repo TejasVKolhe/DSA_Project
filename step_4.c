@@ -66,7 +66,10 @@ void Voltage_resistor(int cycles[][N+1][N+1],int numcycles, int resistor[N+1][N+
                 if(cycles[i][j][k] == 1){
                     volt_res[j][k] = loopCurrent[i+1] * resistor[j][k];
                 }
-                else if(cycles[i][j][k] == -1){
+                else if( numcycles%2==1 && cycles[i][j][k] == -1){
+                    volt_res[j][k] -= loopCurrent[i+1] * resistor[j][k];
+                }
+                else if( numcycles%2==0 && cycles[i][j][k] == -1){
                     volt_res[j][k] += loopCurrent[i+1] * resistor[j][k];
                 }
             }

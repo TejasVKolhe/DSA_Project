@@ -48,11 +48,11 @@ int main(void)
 
 	createAdjMatrix(Adj, arr);
 
-	/*Print Adjacency Matrix
+	//Print Adjacency Matrix
 	printf("Adjacency Matrix:\n");
 	printAdjMatrix(Adj);
 	printf("\n");
-	*/
+	
 
 	FindSpan(Adj, span, trav);
 
