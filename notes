@@ -1,0 +1,17 @@
+one adjacency matrix  
+just says how components are oriented and loops are formed
+0 1 0 0 0 1
+1 0 1 0 1 0
+0 1 0 1 0 0
+0 0 1 0 1 0
+0 1 0 1 0 1
+1 0 0 0 1 0
+
+
+one resistive matrix of same order
+but instead of 1's , values will be substituted
+
+one voltage skew-matrix of same matrix
+and values will be substituted
+
+
