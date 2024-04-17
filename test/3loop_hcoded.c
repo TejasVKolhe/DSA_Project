@@ -154,69 +154,6 @@ void matrixMultiply(int mat1[][N + 1], int mat2[][N + 1], int result[][N + 1]) {
 }
 
 
-int add_onematrix(int current[][N + 1], int ref[][N + 1])
-{
-	int sum = 0;
-	for (int i = 0; i < N + 1; i++) 
-	{
-        for (int j = 0; j < N + 1; j++) 
-		{
-			if(current[i][j] != 0 && ref[i][j] > 0)
-			{
-				sum = sum + current[i][j];
-			}
-            else
-            if(current[i][j] != 0 && ref[i][j] < 0)
-            {
-                sum = sum - current[i][j];
-            }
-            // else
-            // if(current[i][j] < 0 && ref[i][j] < 0)
-            // {
-            //     sum = sum - current[i][j];
-            // }
-            // else 
-            // if(current[i][j] < 0 && ref[i][j] > 0)
-            // {
-            //     sum = sum + current[i][j];
-            // }
-
-		}
-	}
-	return sum;
-}
-
-int add_onematrix_2(int src[][N + 1], int cycle[][N + 1])
-{
-	int sum = 0;
-	for (int i = 0; i < N + 1; i++) 
-	{
-        for (int j = 0; j < N + 1; j++) 
-		{
-			if(cycle[i][j] > 0 && src[i][j] != 0)
-			{
-				sum = sum + src[i][j]; 
-			}
-            // else
-            // if(cycle[i][j] > 0 && src[i][j] < 0)
-            // {
-            //     sum = sum + src[i][j];
-            // }
-            else
-            if(cycle[i][j] < 0 && src[i][j] != 0)
-            {
-                sum = sum - src[i][j];
-            }
-            // else
-            // if(cycle[i][j] < 0 && src[i][j] < 0)
-            // {
-            //     sum = sum - src[i][j];
-            // }
-		}
-	}
-	return sum;
-}
-
 void print(int Adj[][N + 1])
 {
 
@@ -363,3 +300,66 @@ void solveSystemOfEquations(int coeff[N + 1][N + 1], int rhs_mat[N + 1], int num
     //     printf("x[%d] = %.2f\n", i, x[i]);
     // }
 }
+int add_onematrix(int current[][N + 1], int ref[][N + 1])
+{
+	int sum = 0;
+	for (int i = 0; i < N + 1; i++) 
+	{
+        for (int j = 0; j < N + 1; j++) 
+		{
+			if(current[i][j] != 0 && ref[i][j] > 0)
+			{
+				sum = sum + current[i][j];
+			}
+            else
+            if(current[i][j] != 0 && ref[i][j] < 0)
+            {
+                sum = sum - current[i][j];
+            }
+            // else
+            // if(current[i][j] < 0 && ref[i][j] < 0)
+            // {
+            //     sum = sum - current[i][j];
+            // }
+            // else 
+            // if(current[i][j] < 0 && ref[i][j] > 0)
+            // {
+            //     sum = sum + current[i][j];
+            // }
+
+		}
+	}
+	return sum;
+}
+
+int add_onematrix_2(int src[][N + 1], int cycle[][N + 1])
+{
+	int sum = 0;
+	for (int i = 0; i < N + 1; i++) 
+	{
+        for (int j = 0; j < N + 1; j++) 
+		{
+			if(cycle[i][j] > 0 && src[i][j] != 0)
+			{
+				sum = sum + src[i][j]; 
+			}
+            // else
+            // if(cycle[i][j] > 0 && src[i][j] < 0)
+            // {
+            //     sum = sum + src[i][j];
+            // }
+            else
+            if(cycle[i][j] < 0 && src[i][j] != 0)
+            {
+                sum = sum - src[i][j];
+            }
+            // else
+            // if(cycle[i][j] < 0 && src[i][j] < 0)
+            // {
+            //     sum = sum - src[i][j];
+            // }
+		}
+	}
+	return sum;
+}
+
