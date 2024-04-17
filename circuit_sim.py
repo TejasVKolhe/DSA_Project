@@ -2,11 +2,13 @@ import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QRadioButton, QHBoxLayout, QGridLayout, QPushButton, QLineEdit
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtGui import QIcon, QPixmap, QTransform
-from gui_to_file import initmatrix
+from gui_to_file import initmatrix, write_file
+import numpy as np
 
 global Cvalue
 global blocksize
 global dimension
+global matrix
 
 
 class MainWindow(QMainWindow):
@@ -72,7 +74,7 @@ class MainWindow(QMainWindow):
         
         ## number of column and rows of the grid
         global dimension
-        dimension = 15
+        dimension = 5
         n = dimension
         
         ## size in pixel 
@@ -80,7 +82,8 @@ class MainWindow(QMainWindow):
         blocksize = 40
 
         ## calling initmatrix function from another file to create emptry matrix
-        initmatrix(n)
+        global matrix
+        matrix = initmatrix(n)
 
         self.buttons = []  # List to hold all buttons
         self.button_rotations = {}  # Dictionary to store rotation angle for each button
@@ -92,6 +95,12 @@ class MainWindow(QMainWindow):
                 button.setFixedSize(QSize(blocksize, blocksize))
                 button.clicked.connect(lambda checked, i=i, j=j: self.button_clicked(i, j))
                 rightGrid.addWidget(button, i, j)
+
+                button.setProperty("button_value", n*i + j)
+                # Retrieving the value later
+                button_value = button.property("button_value")
+                # print("Button Value:", button_value)
+
                 self.buttons.append(button)  # Add button to the list
                 self.button_rotations[button] = 0  # Initial rotation angle is 0
 
@@ -121,9 +130,12 @@ class MainWindow(QMainWindow):
         global Cvalue
         global blocksize
         global dimension
+        global matrix
+
         button = self.buttons[row * dimension + col]  # Get the button at the specified row and column
         icon_path = f"./icons/{self.active_component.lower()}.jpg"
         pixmap = QPixmap(icon_path)
+
 
         ## Rotate the image
         rotation = self.button_rotations[button]
@@ -157,6 +169,8 @@ class MainWindow(QMainWindow):
         if self.active_component=='Node':
             rotation = 0
 
+        button_value = button.property("button_value")
+
         
         match rotation:
             case 0:
@@ -168,6 +182,24 @@ class MainWindow(QMainWindow):
             case 270:
                 direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
 
+        n = dimension
+        match rotation:
+            case 0:
+                bval=button_value
+                newbval=button_value+1
+                edge = "{bval} -> {newbval}".format(bval=button_value, newbval=button_value+1)
+            case 90:
+                bval=button_value
+                newbval=button_value+n
+                edge = "{bval} -> {newbval}".format(bval=button_value, newbval=button_value+n)
+            case 180:
+                bval=button_value+1
+                newbval=button_value
+                edge = "{bval} -> {newbval}".format(bval=button_value+1, newbval=button_value)
+            case 270:
+                edge = "{bval} -> {newbval}".format(bval=button_value-n, newbval=button_value)
+                bval=button_value-n
+                newbval=button_value
 
 
         if self.active_component=='Node':
@@ -177,7 +209,25 @@ class MainWindow(QMainWindow):
                 direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
 
 
-        print("Row, Col:", row, col, self.active_component, val, rotation, direction)
+        ## Adding into Matrix...  
+        matrix[bval] = '0'*n
+
+        # matrix[bval*(n*n) + newbval] = 0
+        # matrix[newbval*(n*n) + bval] = 0
+
+
+        if self.active_component=='Wire' or self.active_component=='Battery' or self.active_component=='Resistor':
+            matrix[bval*(n*n) + newbval] = 1
+            matrix[newbval*(n*n) + bval] = 1
+            
+        write_file(matrix)
+        
+
+
+
+
+
+        print("Row, Col:", row, col, self.active_component, val, rotation, direction, ' edge :', edge)
 
 
 
@@ -187,6 +237,12 @@ class MainWindow(QMainWindow):
             button.setChecked(False)
             button.setIcon(QIcon())  # Clear the icon
             self.button_rotations[button] = 0  # Reset rotation angle to 0
+
+        global matrix
+        global dimension
+        n = dimension
+        matrix = initmatrix(n)
+
         print("Buttons Cleared")
 
 
@@ -195,8 +251,11 @@ class MainWindow(QMainWindow):
         self.centralWidget().setText("BOOM!")
 
     def text_edited(self, s):
+        global Cvalue
+        Cvalue = s
         value = s
         print('value = ',value)
+
     
 
 
