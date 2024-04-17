@@ -12,6 +12,7 @@ global dimension
 global matrix
 
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -75,7 +76,7 @@ class MainWindow(QMainWindow):
         
         ## number of column and rows of the grid
         global dimension
-        dimension = 5
+        dimension = 4
         n = dimension
         
         ## size in pixel 
@@ -184,6 +185,8 @@ class MainWindow(QMainWindow):
                 direction = "({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
 
         n = dimension
+        bval = 0
+        newbval = 0
         match rotation:
             case 0:
                 bval=button_value
@@ -209,17 +212,30 @@ class MainWindow(QMainWindow):
                 direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row, col=col+1, newrow=row, newcol=col)
                 direction += "\n({row}, {col}) -> ({newrow}, {newcol})".format(row=row+1, col=col, newrow=row, newcol=col)
 
+        ## adding into matrix
 
-        ## Adding into Matrix...  
-        matrix[bval] = '0'*n
-
-        # matrix[bval*(n*n) + newbval] = 0
-        # matrix[newbval*(n*n) + bval] = 0
+        ## clear earlier edges of that node
+        for i in range(n*n):
+            matrix[(n*n)*bval + i] = 0
+            matrix[(n*n)*newbval + i] = 0
+            matrix[(n*n)*i + bval] = 0
+            matrix[(n*n)*i + newbval] = 0
 
 
         if self.active_component=='Wire' or self.active_component=='Battery' or self.active_component=='Resistor':
-            matrix[bval*(n*n) + newbval] = 1
-            matrix[newbval*(n*n) + bval] = 1
+            matrix[(n*n)*bval + newbval] = 1
+            matrix[(n*n)*newbval + bval] = 1
+        
+        if self.active_component=='Node':
+            newbval = bval + 1
+            matrix[(n*n)*bval + newbval] = 1
+            matrix[(n*n)*newbval + bval] = 1
+
+            matrix[(n*n)*bval + newbval + n] = 1
+            matrix[(n*n)*newbval + bval + n] = 1
+
+
+
             
         write_file(matrix)
         
@@ -241,6 +257,8 @@ class MainWindow(QMainWindow):
 
         global matrix
         global dimension
+        global dict
+        dict = {}
         n = dimension
         matrix = initmatrix(n)
 
