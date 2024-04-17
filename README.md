@@ -15,7 +15,7 @@ This highly multidisciplinary approach combines abstract Mathematics, Linear Alg
 - Gotlieb and Corneil Algorithm
 - Vector-Centric Algorithm for Spanning Tree
 - Paton Algorithm for Pruning
-- LU decomposition methods
+- Gaussian Elimination and Back Substitution
 
 ## Conclusions and Scope
 
