@@ -39,7 +39,11 @@ introduction of a nonlinear equation solver.
 
 4.  The program could be modified using objects and the powerful concepts of object-
 oriented programming: this would open up new possibilities, also because of the
-availability of efficient C++ libraries like Boost 
+availability of efficient C++ libraries like Boost
+
+## Presentation
+View our presentation on Prezi [here](https://prezi.com/view/Xt67dQxjIwEM1Jalexth/)
+
 
 ## References
 - Complex Circuit Analysis - [Automated Circuit Solving](https://core.ac.uk/download/pdf/53745212.pdf)
