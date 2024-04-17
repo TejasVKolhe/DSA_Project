@@ -4,6 +4,7 @@ from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtGui import QIcon, QPixmap, QTransform
 from gui_to_file import initmatrix, write_file
 import numpy as np
+import os 
 
 global Cvalue
 global blocksize
@@ -65,7 +66,7 @@ class MainWindow(QMainWindow):
 
         ## Create a "solve" button
         solve = QPushButton("Solve")
-        # solve.clicked.connect(self.solve)
+        solve.clicked.connect(self.solve)
         leftPanel.addWidget(solve)
 
         rightGrid = QGridLayout()
@@ -255,6 +256,9 @@ class MainWindow(QMainWindow):
         Cvalue = s
         value = s
         print('value = ',value)
+    
+    def solve(self):
+        os.system('./a.out')
 
     
 
