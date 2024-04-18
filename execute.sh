@@ -1,3 +1,3 @@
-gcc main.c
+gcc project.c
 ./a.exe
 ./a.out
