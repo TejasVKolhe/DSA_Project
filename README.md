@@ -79,7 +79,7 @@ Install dependencies
 Making Executable
 
 ```bash
-  chmod + run.sh
+  chmod +x run.sh
 ```
 
 Run Program
